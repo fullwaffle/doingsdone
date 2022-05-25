@@ -2,7 +2,19 @@
 // показывать или нет выполненные задачи
 $show_complete_tasks = rand(0, 1);
 
-$categories = [
+function count_projects($tasks, $project) {
+    $count = 0;
+
+    foreach ($tasks as $task) {
+        if ($task['project'] === $project) {
+            $count++;
+        }
+    }
+
+    return $count;
+}
+
+$projects = [
     'incoming' => 'Входящие',
     'study' => 'Учеба',
     'work' => 'Работа',
@@ -14,37 +26,37 @@ $tasks = [
     [
         'name' => 'Собеседование в IT компании',
         'date' => '01.12.2019',
-        'category' => $categories['work'],
+        'project' => $projects['work'],
         'success' => false
     ],
     [
         'name' => 'Выполнить тестовое задание',
         'date' => '25.12.2019',
-        'category' => $categories['work'],
+        'project' => $projects['work'],
         'success' => false
     ],
     [
         'name' => 'Сделать задание первого раздела',
         'date' => '21.12.2019',
-        'category' => $categories['study'],
+        'project' => $projects['study'],
         'success' => true
     ],
     [
         'name' => 'Встреча с другом',
         'date' => '22.12.2019',
-        'category' => $categories['incoming'],
+        'project' => $projects['incoming'],
         'success' => false
     ],
     [
         'name' => 'Купить корм для кота',
         'date' => null,
-        'category' => $categories['homework'],
+        'project' => $projects['homework'],
         'success' => false
     ],
     [
         'name' => 'Заказать пиццу',
         'date' => null,
-        'category' => $categories['homework'],
+        'project' => $projects['homework'],
         'success' => false
     ],
 ];
@@ -89,10 +101,10 @@ $tasks = [
 
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
-                        <?php foreach ($categories as $value): ?>
+                        <?php foreach ($projects as $project): ?>
                             <li class="main-navigation__list-item">
-                                <a class="main-navigation__list-item-link" href="#"><?= $value ?></a>
-                                <span class="main-navigation__list-item-count">0</span>
+                                <a class="main-navigation__list-item-link" href="#"><?= $project ?></a>
+                                <span class="main-navigation__list-item-count"><?= count_projects($tasks, $project) ?></span>
                             </li>
                         <?php endforeach; ?>
                     </ul>

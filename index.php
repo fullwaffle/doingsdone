@@ -1,8 +1,9 @@
 <?php
-
 require_once 'functions.php';
 require_once 'data.php';
 require_once 'helpers.php';
+
+echo get_time_left('2022-05-30');
 
 $page_content = include_template('main.php', [
     'projects' => $projects,
